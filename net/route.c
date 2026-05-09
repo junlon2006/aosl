@@ -13,6 +13,7 @@
 #include <kernel/kernel.h>
 #include <kernel/err.h>
 #include <kernel/net.h>
+#include <kernel/netifs.h>
 #include <kernel/thread.h>
 #include <api/aosl_mpq.h>
 #include <api/aosl_route.h>
@@ -101,13 +102,13 @@ static int __same_def_rt_cnt (const aosl_def_rt_t *def_rt1, const aosl_def_rt_t 
 	       def_rt1->IPv6.def_rt_cnt == def_rt2->IPv6.def_rt_cnt;
 }
 
-void __invalidate_rt (aosl_rt_t *rt)
+static void __invalidate_rt (aosl_rt_t *rt)
 {
 	rt->netif.if_index = -1; /* invalidate the if_index to indicate none */
 	rt->gw.sa.sa_family = AOSL_AF_UNSPEC; /* invalidate the sa_family to indicate none */
 }
 
-void __invalidate_def_rt (aosl_def_rt_t *def_rt)
+static void __invalidate_def_rt (aosl_def_rt_t *def_rt)
 {
 	__invalidate_rt (&def_rt->IPv4);
 	__invalidate_rt (&def_rt->IPv6);

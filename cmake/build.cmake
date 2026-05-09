@@ -74,11 +74,10 @@ list(APPEND AOSL_ADD_SOURCES
 
     "${AOSL_DIR}/mm/mm.c"
 
-    "${AOSL_DIR}/net/if.c"
+    "${AOSL_DIR}/net/netifs.c"
     "${AOSL_DIR}/net/route.c"
     "${AOSL_DIR}/net/sk_utils.c"
-    "${AOSL_DIR}/net/inet_ntop.c"
-    "${AOSL_DIR}/net/inet_pton.c"
+    "${AOSL_DIR}/net/inet.c"
     "${AOSL_DIR}/net/dns.c"
 
     "${AOSL_DIR}/test/aosl_test.c"

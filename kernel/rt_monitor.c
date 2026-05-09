@@ -28,7 +28,7 @@
 #include <kernel/rt_monitor.h>
 #include <kernel/kernel.h>
 #include <kernel/err.h>
-#include <kernel/net.h>
+#include <kernel/netifs.h>
 
 
 static int af_netlink_fd = -1;
@@ -227,7 +227,7 @@ static int __af_get_default_rt (uint16_t af, aosl_rt_t *rt, uint32_t *tb_id_p)
 	uint32_t min_metric = 0xffffffffu; /* set to the max unsigned integer value */
 	uint32_t seq = __nlmsg_seq++;
 
-	__invalidate_rt (rt);
+	aosl_invalidate_rt (rt);
 
 	sk = __socket_nl_rt ();
 	if (sk < 0)
@@ -403,7 +403,7 @@ __done:
 		// ignore fe80:: scope link route
 		if (rt->gw.sa.sa_family == AF_INET6) {
 			if (rt->gw.in6.sin6_addr.s6_addr_v[0] == 0xfe && rt->gw.in6.sin6_addr.s6_addr_v[1] == 0x80) {
-				__invalidate_rt (rt);
+					aosl_invalidate_rt (rt);
 				goto __close_sk;
 			}
 		}
@@ -436,6 +436,8 @@ int os_get_def_rt (aosl_def_rt_t *def_rt)
 
 	return got_v4 + got_v6;
 }
+
+extern void check_report_def_rt_change_event (aosl_net_ev_func_t f, void *arg);
 
 static void __process_rtmsg (void *buf, size_t len, aosl_net_ev_func_t f, void *arg)
 {
