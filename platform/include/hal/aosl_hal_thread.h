@@ -9,6 +9,7 @@
 #ifndef __AOSL_HAL_THREAD_H__
 #define __AOSL_HAL_THREAD_H__
 
+#include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include <hal/aosl_hal_config.h>
@@ -72,6 +73,14 @@ void aosl_hal_thread_exit(void *retval);
  * @return 0 on success, < 0 on error
  */
 int aosl_hal_thread_set_name(const char *name);
+
+/**
+ * @brief get current thread name
+ * @param [out] name output buffer for thread name
+ * @param [in] size output buffer size
+ * @return 0 on success, < 0 on error
+ */
+int aosl_hal_thread_get_name(char *name, size_t size);
 
 /**
  * @brief set current thread priority

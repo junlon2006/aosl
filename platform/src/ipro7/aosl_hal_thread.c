@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <stdio.h>
 #include <ipro_osal.h>
 #include <FreeRTOS_POSIX.h>
 #include <pthread.h>
@@ -147,6 +148,13 @@ aosl_thread_t aosl_hal_thread_self()
 int aosl_hal_thread_set_name(const char *name)
 {
   return 0;
+}
+
+int aosl_hal_thread_get_name(char *name, size_t size)
+{
+  (void)name;
+  (void)size;
+  return -1;
 }
 
 int aosl_hal_thread_set_priority(aosl_thread_proiority_e priority)

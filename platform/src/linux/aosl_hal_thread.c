@@ -55,6 +55,22 @@ int aosl_hal_thread_set_name(const char *name)
 	return prctl(PR_SET_NAME, name);
 }
 
+int aosl_hal_thread_get_name(char *name, size_t size)
+{
+	char thread_name[16] = {0};
+
+	if (!name || size == 0) {
+		return -1;
+	}
+
+	if (prctl(PR_GET_NAME, (unsigned long)thread_name, 0, 0, 0) != 0) {
+		return -1;
+	}
+
+	snprintf(name, size, "%s", thread_name);
+	return 0;
+}
+
 static int __get_os_priority (aosl_thread_proiority_e aosl_pri, int *os_pri)
 {
 	int min_prio = sched_get_priority_min (SCHED_RR);

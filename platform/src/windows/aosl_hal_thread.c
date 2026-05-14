@@ -123,6 +123,51 @@ static int set_thread_name_internal(const char *name)
     return SUCCEEDED(set_thread_description(GetCurrentThread(), name_w)) ? 0 : -1;
 }
 
+static int get_thread_name_internal(char *name, size_t size)
+{
+    typedef HRESULT(WINAPI *get_thread_description_t)(HANDLE, PWSTR *);
+    static get_thread_description_t get_thread_description = NULL;
+    static int searched = 0;
+    PWSTR name_w = NULL;
+    int converted;
+
+    if (!name || size == 0) {
+        return -1;
+    }
+
+    name[0] = '\0';
+
+    if (!searched) {
+        HMODULE kernel32 = GetModuleHandleW(L"kernel32.dll");
+        if (kernel32 != NULL) {
+            get_thread_description = (get_thread_description_t)GetProcAddress(kernel32, "GetThreadDescription");
+        }
+        searched = 1;
+    }
+
+    /* If the platform does not provide GetThreadDescription, skip fetching. */
+    if (!get_thread_description) {
+        return -1;
+    }
+
+    if (!SUCCEEDED(get_thread_description(GetCurrentThread(), &name_w)) || name_w == NULL) {
+        return -1;
+    }
+
+    converted = WideCharToMultiByte(CP_UTF8, 0, name_w, -1, name, (int)size, NULL, NULL);
+    if (converted <= 0) {
+        converted = WideCharToMultiByte(CP_ACP, 0, name_w, -1, name, (int)size, NULL, NULL);
+    }
+
+    LocalFree(name_w);
+    if (converted <= 0) {
+        name[0] = '\0';
+        return -1;
+    }
+
+    return 0;
+}
+
 static unsigned __stdcall thread_entry_wrapper(void *arg)
 {
     win_thread_start_t *start = (win_thread_start_t *)arg;
@@ -247,6 +292,11 @@ aosl_thread_t aosl_hal_thread_self()
 int aosl_hal_thread_set_name(const char *name)
 {
     return set_thread_name_internal(name);
+}
+
+int aosl_hal_thread_get_name(char *name, size_t size)
+{
+    return get_thread_name_internal(name, size);
 }
 
 int aosl_hal_thread_set_priority(aosl_thread_proiority_e priority)

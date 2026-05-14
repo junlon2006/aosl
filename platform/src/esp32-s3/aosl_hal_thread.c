@@ -107,6 +107,23 @@ int aosl_hal_thread_set_name(const char *name)
 	return 0;
 }
 
+int aosl_hal_thread_get_name(char *name, size_t size)
+{
+	const char *task_name;
+
+	if (!name || size == 0) {
+		return -1;
+	}
+
+	task_name = pcTaskGetName((TaskHandle_t)aosl_hal_thread_self());
+	if (!task_name) {
+		return -1;
+	}
+
+	snprintf(name, size, "%s", task_name);
+	return 0;
+}
+
 int aosl_hal_thread_set_priority(aosl_thread_proiority_e priority)
 {
 	return 0;
