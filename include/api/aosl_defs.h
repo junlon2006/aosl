@@ -97,34 +97,24 @@ extern "C" {
 /* I think 64 args is big enough */
 #define AOSL_VAR_ARGS_MAX 64
 
+//#define BUILD_TARGET_SHARED
 
-#if defined (CONFIG_SHARED)
-// for shared
-#if defined (__GNUC__)
+#if defined (__GNUC__) && defined(BUILD_TARGET_SHARED)
 #define __export_in_so__ __attribute__ ((visibility ("default")))
-#elif defined (_MSC_VER) && defined(AGORA_BUILDING_API)
+#elif defined(_MSC_VER) && defined(BUILD_TARGET_SHARED) && defined(AGORA_BUILDING_API)
 #define __export_in_so__ __declspec (dllexport)
-#elif defined (_MSC_VER) && !defined(AGORA_BUILDING_API)
+#elif defined(_MSC_VER) && defined(BUILD_TARGET_SHARED) && !defined(AGORA_BUILDING_API)
 #define __export_in_so__ __declspec (dllimport)
 #else
 #define __export_in_so__
 #endif
-#else
-// for static
-#define __export_in_so__
-#endif
 
-#if defined(CONFIG_SHARED)
-// for shared
-#if defined (_MSC_VER) && defined (AGORA_BUILDING_API)
+
+#if defined(_MSC_VER) && defined(BUILD_TARGET_SHARED) && defined(AGORA_BUILDING_API)
 #define __aosl_api__ __declspec (dllexport)
-#elif defined (_MSC_VER) && !defined (AGORA_BUILDING_API)
+#elif defined(_MSC_VER) && defined(BUILD_TARGET_SHARED) && !defined(AGORA_BUILDING_API)
 #define __aosl_api__ __declspec (dllimport)
 #else
-#define __aosl_api__
-#endif
-#else
-// for static
 #define __aosl_api__
 #endif
 

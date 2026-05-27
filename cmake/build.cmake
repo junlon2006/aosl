@@ -4,9 +4,6 @@ file(GLOB   AOSL_PLATFORM_SRCS       "${AOSL_DIR}/platform/src/${CONFIG_PLATFORM
 list(APPEND AOSL_ADD_SOURCES          ${AOSL_PLATFORM_SRCS})
 
 ############## Add definitions ###############
-# Define AGORA_BUILDING_API to indicate that we are building the AOSL library itself
-list(APPEND AOSL_ADD_DEFINITIONS "-DAGORA_BUILDING_API")
-
 # Define AOSL config options with default values
 # Format: CONFIG_NAME=default_value
 # Can be overridden via cmake -DCONFIG_AOSL_IPV6=n etc.
