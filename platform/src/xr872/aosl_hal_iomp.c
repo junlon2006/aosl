@@ -2,7 +2,7 @@
 #include <hal/aosl_hal_memory.h>
 #include <lwip/sockets.h>
 #include <lwip/netdb.h>
-
+#include <api/aosl_log.h>
 
 fd_set_t aosl_hal_fdset_create()
 {
