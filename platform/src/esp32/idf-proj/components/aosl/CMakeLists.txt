@@ -1,5 +1,5 @@
 set(AOSL_DIR ${COMPONENT_PATH}/../../../../../..)
-set(CONFIG_PLATFORM "esp32-s3")
+set(CONFIG_PLATFORM "esp32")
 set(AOSL_DECLARE_PROJECT OFF CACHE BOOL "Declare as Standalone Project" FORCE)
 
 include(${AOSL_DIR}/CMakeLists.txt)

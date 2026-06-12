@@ -4,7 +4,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # ===============================Read me first==================================
 # Available configurable variables for AOSL:
 #   CONFIG_PLATFORM: Target platform (default: linux)
-#     Available platforms: linux, esp32-s3, etc.
+#     Available platforms: linux, esp32, bk725x, etc.
 #     Usage: Set before including CMakeLists.txt or use -DCONFIG_PLATFORM=<platform>
 #
 #   AOSL_DIR: Library root directory (default: ${CMAKE_CURRENT_SOURCE_DIR})

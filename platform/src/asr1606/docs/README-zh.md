@@ -30,7 +30,7 @@
 ### 配置说明
 
 - **仅支持 SELECT**: ASR1606 上的 lwIP 提供 `select()` 接口，但不支持 `epoll` 或 `poll`。
-- **无条件变量**: ThreadX RTOS 没有 `pthread_cond` 等价接口，使用信号量 (`ql_rtos_semaphore_*`) 作为同步原语替代，与 bk7258 平台保持一致。
+- **无条件变量**: ThreadX RTOS 没有 `pthread_cond` 等价接口，使用信号量 (`ql_rtos_semaphore_*`) 作为同步原语替代，与 bk725x 平台保持一致。
 
 ## HAL 实现说明
 

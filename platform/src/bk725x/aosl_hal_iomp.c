@@ -2,7 +2,7 @@
 #include <lwip/netdb.h>
 #include <lwip/errno.h>
 #include <api/aosl_mm.h>
-#include <api/aosl_log.h>
+
 #include <hal/aosl_hal_errno.h>
 #include <hal/aosl_hal_iomp.h>
 

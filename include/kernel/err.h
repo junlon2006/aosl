@@ -60,6 +60,9 @@ static __inline__ int aosl_hal_set_error(int err)
 			case AOSL_HAL_RET_EAGAIN:
 				newerr = AOSL_EAGAIN;
 				break;
+			case AOSL_HAL_RET_EINPROGRESS:
+				newerr = AOSL_EINPROGRESS;
+				break;
 			default:
 				newerr = AOSL_EHAL;
 				break;

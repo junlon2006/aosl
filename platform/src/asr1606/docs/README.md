@@ -30,7 +30,7 @@
 ### Rationale
 
 - **SELECT only**: lwIP on ASR1606 provides `select()` but not `epoll` or `poll`.
-- **No condition variables**: ThreadX RTOS has no `pthread_cond` equivalent. Semaphores (`ql_rtos_semaphore_*`) are used as the synchronization primitive instead, consistent with the bk7258 platform.
+- **No condition variables**: ThreadX RTOS has no `pthread_cond` equivalent. Semaphores (`ql_rtos_semaphore_*`) are used as the synchronization primitive instead, consistent with the bk725x platform.
 
 ## HAL Implementation Notes
 

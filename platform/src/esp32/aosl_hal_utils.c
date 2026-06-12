@@ -48,7 +48,7 @@ int aosl_hal_os_version (char buf [], int buf_sz)
 	if (buf_sz <= 1) {
 		return -1;
 	}
-	snprintf(buf, buf_sz, "%s", "esp32-s3");
+	snprintf(buf, buf_sz, "%s", "esp32");
 	return 0;
 }
 

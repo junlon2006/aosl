@@ -12,7 +12,7 @@ platform/src/${platform}: HAL layer implementation code
 # 2.2 HAL Layer Implementation
 Implement the interfaces defined in the header files in platform/include/hal.
 Porting includes atomic, file, iomp, socket, memory, thread, time, etc.
-You can refer to the porting implementation examples of linux and esp32-s3 when porting.
+You can refer to the porting implementation examples of linux and esp32 when porting.
 
 # 3. Build Guide
 There is a CMakeLists.txt file in the project root directory for building examples.
@@ -39,18 +39,18 @@ At this point, you can see the libaosl.a static library and the include exported
 
 * Build Variables:  
   - (1) AOSL_DIR: Root directory of the aosl library, if not set, it defaults to CMAKE_CURRENT_SOURCE_DIR
-  - (2) CONFIG_PLATFORM: Name of the target platform to port, such as linux, esp32-s3, default is linux
+  - (2) CONFIG_PLATFORM: Name of the target platform to port, such as linux, esp32, default is linux
 
 There are two ways to set parameters:
 - (1) Specify through cmake command parameters, for example:
 ```
-cmake -DCONFIG_PLATFORM=esp32-s3 \
+cmake -DCONFIG_PLATFORM=esp32 \
       -DAOSL_DECLARE_PROJECT=OFF
 ```
 - (2) Set parameters before include, for example:
 ```
 set(AOSL_DIR ${COMPONENT_PATH}/../../../../../..)
-set(CONFIG_PLATFORM "esp32-s3")
+set(CONFIG_PLATFORM "esp32")
 set(AOSL_DECLARE_PROJECT OFF CACHE BOOL "Declare as Standalone Project" FORCE)
 include(${AOSL_DIR}/CMakeLists.txt)
 ```
@@ -78,7 +78,7 @@ You can refer to platform/src/esp32/idf-proj as a reference example for building
 ```
 # 1. Set build variables
 set(AOSL_DIR ${COMPONENT_PATH}/../../../../../..)
-set(CONFIG_PLATFORM "esp32-s3")
+set(CONFIG_PLATFORM "esp32")
 # 2. Set build options
 set(AOSL_DECLARE_PROJECT OFF CACHE BOOL "Declare as Standalone Project" FORCE)
 
