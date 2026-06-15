@@ -169,6 +169,14 @@ int aosl_hal_sk_bind_device(int sockfd, const char *if_name)
 	return 0;
 }
 
+int aosl_hal_sk_set_dscp(aosl_fd_t sockfd, enum aosl_socket_domain domain, uint8_t dscp)
+{
+	(void)sockfd;
+	(void)domain;
+	(void)dscp;
+	return 0;
+}
+
 int aosl_hal_sk_listen(int sockfd, int backlog)
 {
 	int ret = lwip_listen(sockfd, backlog);

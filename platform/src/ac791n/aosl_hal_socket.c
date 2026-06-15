@@ -178,6 +178,14 @@ int aosl_hal_sk_setsockopt(int sockfd, int level, int optname,
     return ret;
 }
 
+int aosl_hal_sk_set_dscp(aosl_fd_t sockfd, enum aosl_socket_domain domain, uint8_t dscp)
+{
+    (void)sockfd;
+    (void)domain;
+    (void)dscp;
+    return 0;
+}
+
 #include "lwip.h"
 
 int aosl_hal_sk_get_local_ip(aosl_sockaddr_t *addr)

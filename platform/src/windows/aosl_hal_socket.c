@@ -180,6 +180,37 @@ int aosl_hal_sk_bind_device(aosl_fd_t sockfd, const char *if_name) {
   return 0;
 }
 
+int aosl_hal_sk_set_dscp(aosl_fd_t sockfd, enum aosl_socket_domain domain, uint8_t dscp) {
+  DWORD traffic_class = ((DWORD)dscp) << 2;
+  int level;
+  int optname;
+  SOCKET sock;
+
+  if (aosl_fd_invalid(sockfd)) {
+    return AOSL_HAL_RET_EHAL;
+  }
+  sock = (SOCKET)sockfd;
+
+  switch (domain) {
+  case AOSL_AF_INET:
+    level = IPPROTO_IP;
+    optname = IP_TOS;
+    break;
+  case AOSL_AF_INET6:
+    level = IPPROTO_IPV6;
+    optname = IPV6_TCLASS;
+    break;
+  default:
+    return AOSL_HAL_RET_EHAL;
+  }
+
+  if (setsockopt(sock, level, optname, (const char *)&traffic_class, sizeof(traffic_class)) == SOCKET_ERROR) {
+    return convert_socket_error(WSAGetLastError());
+  }
+
+  return 0;
+}
+
 int aosl_hal_sk_listen(aosl_fd_t sockfd, int backlog) {
   SOCKET sock;
 
