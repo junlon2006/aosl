@@ -18,7 +18,9 @@
 #endif
 
 #ifndef FuncReturnAddress
-#if defined(_MSC_VER)
+#if defined(__ARMCC_VERSION)
+#define FuncReturnAddress() __return_address()
+#elif defined(_MSC_VER)
 #include <intrin.h>
 #define FuncReturnAddress() _ReturnAddress()
 #else
