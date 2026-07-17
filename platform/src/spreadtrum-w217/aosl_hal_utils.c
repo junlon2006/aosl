@@ -23,6 +23,6 @@ int aosl_hal_get_uuid(char buf[], int buf_sz)
 
 int aosl_hal_os_version (char buf [], int buf_sz)
 {
-  snprintf(buf, buf_sz, "%s", "spreadtrum-8910ff");
+  snprintf(buf, buf_sz, "%s", "spreadtrum-w217");
   return 0;
 }
