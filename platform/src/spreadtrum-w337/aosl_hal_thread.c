@@ -27,7 +27,7 @@ int aosl_hal_thread_create(aosl_thread_t *thread, aosl_thread_param_t *param,
 {
   BLOCK_ID thread_id;
   aosl_thread_entry_wrapper_args_t *wrapper = NULL;
-  uint32 priority = 67; //must be 228, because of 117 threadx kernal schedual issue.
+  uint32 priority = 67;
   uint32 stack_size = 1024 * 16;
 
   if (NULL == thread || NULL == param || NULL == entry) {

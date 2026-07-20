@@ -4,7 +4,6 @@
 #include <hal/aosl_hal_time.h>
 
 extern uint32_t TM_GetTotalSeconds (void);
-extern uint32_t SLEEP_GetCur32kNum (void);
 int aosl_hal_get_uuid(char buf[], int buf_sz)
 {
   uint32_t tick_now, ts_sec, s;
