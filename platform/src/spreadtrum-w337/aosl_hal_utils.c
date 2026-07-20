@@ -4,18 +4,19 @@
 #include <hal/aosl_hal_time.h>
 
 extern uint32_t TM_GetTotalSeconds (void);
-extern uint32_t SLEEP_GetCur32kNum (void);
 int aosl_hal_get_uuid(char buf[], int buf_sz)
 {
-  uint32_t tick_now, ts_sec;
+  uint32_t tick_now, ts_sec, s;
   uint32_t t1, t2;
 
   tick_now = (uint32_t)aosl_hal_get_tick_ms ();
   ts_sec = TM_GetTotalSeconds ();
 
-  t1 = SLEEP_GetCur32kNum ();
-  aosl_hal_msleep(1);
-  t2 = SLEEP_GetCur32kNum ();
+  s = tick_now + ts_sec;
+
+  srand (s);
+  t1 = rand ();
+  t2 = rand ();
 
   snprintf (buf, buf_sz, "%08x%08x%08x%08x", tick_now, ts_sec, t1, t2);
 
@@ -24,6 +25,6 @@ int aosl_hal_get_uuid(char buf[], int buf_sz)
 
 int aosl_hal_os_version (char buf [], int buf_sz)
 {
-  snprintf(buf, buf_sz, "%s", "spreadtrum-w217");
+  snprintf(buf, buf_sz, "%s", "spreadtrum-w337");
   return 0;
 }
